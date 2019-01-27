@@ -1,0 +1,11 @@
+{
+  "id": "tramplestopper",
+  "name": "Trample Stopper",
+  "version": "1.1.0",
+  "side": "universal",
+  "initializer": "com.unrealdinnerbone.tramplestopper.TrampleStopper",
+  "mixins": {
+    "client": "tramplestopper.client.json",
+    "common": "tramplestopper.common.json"
+  }
+}

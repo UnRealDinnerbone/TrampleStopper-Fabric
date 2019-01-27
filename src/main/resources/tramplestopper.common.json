@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.unrealdinnerbone.tramplestopper.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinBlockFarmland"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
