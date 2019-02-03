@@ -25,8 +25,15 @@ minecraft {
 
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w04b"
-	mappings "net.fabricmc:yarn:19w04b.2"
-	modCompile "net.fabricmc:fabric-loader:0.3.3.102"
-	modCompile "net.fabricmc:fabric:0.1.5.83"
+	if(project.hasProperty("devWorkspace")) {
+	minecraft "com.mojang:minecraft:" + project.property("minecraftVersion")
+	mappings "net.fabricmc:yarn:" + project.property("mappingsVersion")
+	modCompile "net.fabricmc:fabric-loader:" + project.property("loaderVersion")
+	modCompile "net.fabricmc:fabric:" + project.property("fabricVversion")
+}else {
+	minecraft "com.mojang:minecraft:" + "${minecraft_version}"
+	mappings "net.fabricmc:yarn:"  + "${mappings_version}"
+	modCompile "net.fabricmc:fabric-loader:"  + "${loader_version}"
+	modCompile "net.fabricmc:fabric:"  + "${fabric_version}"
+}
 }
