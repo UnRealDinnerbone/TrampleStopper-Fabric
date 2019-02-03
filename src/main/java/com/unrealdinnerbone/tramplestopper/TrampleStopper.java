@@ -11,9 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-
 public class TrampleStopper implements ModInitializer {
-
 
     @Override
 	public void onInitialize() {
