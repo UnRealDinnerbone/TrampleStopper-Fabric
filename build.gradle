@@ -21,7 +21,6 @@ def buildVersion = ENV.BUILD_NUMBER ? "${mod_verison}.${ENV.BUILD_NUMBER}" : "${
 version = "${build_minecraft_version}-" + buildVersion + "-universal"
 
 archivesBaseName = "TrampleStoperFabric"
-version = "${mod_verison}"
 
 minecraft {
 	
