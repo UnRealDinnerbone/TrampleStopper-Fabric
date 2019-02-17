@@ -16,7 +16,7 @@ public class TrampleStopper implements ModInitializer {
     @Override
 	public void onInitialize() {
         System.out.println("Loading TrampleStopper");
-	}
+    }
 
     public static boolean onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
         if (entity instanceof PlayerEntity) {
