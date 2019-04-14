@@ -1,11 +1,27 @@
 {
+  "schemaVersion": 1,
   "id": "tramplestopper",
-  "name": "Trample Stopper",
   "version": "1.1.0",
-  "side": "universal",
-  "initializer": "com.unrealdinnerbone.tramplestopper.TrampleStopper",
-  "mixins": {
-    "client": "tramplestopper.client.json",
-    "common": "tramplestopper.common.json"
+  "name": "Trample Stopper",
+  "description": "Stops crop trampling",
+  "authors": [
+    "UnRealDinnerbone"
+  ],
+  "icon": "assets/tramplestopper/logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.unrealdinnerbone.tramplestopper.TrampleStopper"
+    ]
+  },
+  "mixins": [
+    {
+      "environment": "*",
+      "config": "tramplestopper.common.json"
+    }
+  ],
+  "requires": {
+    "fabricloader": "=>0.4.0",
+    "fabric": "*"
   }
 }

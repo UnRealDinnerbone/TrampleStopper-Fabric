@@ -21,7 +21,7 @@ public class TrampleStopper implements ModInitializer {
     public static boolean onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
         if (entity instanceof PlayerEntity) {
             PlayerEntity entityPlayer = (PlayerEntity) entity;
-            for (ItemStack itemStack : entityPlayer.getItemsArmor()) {
+            for (ItemStack itemStack : entityPlayer.getArmorItems()) {
                 if (itemStack.getItem() instanceof ArmorItem) {
                     ArmorItem armorItem = (ArmorItem) itemStack.getItem();
                     if(armorItem.getSlotType() == EquipmentSlot.FEET) {
