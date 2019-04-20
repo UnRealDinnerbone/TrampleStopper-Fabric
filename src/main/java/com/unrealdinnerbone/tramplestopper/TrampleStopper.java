@@ -10,12 +10,17 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TrampleStopper implements ModInitializer {
 
+
+    public static Logger LOGGER = LogManager.getLogger();
+
     @Override
 	public void onInitialize() {
-        System.out.println("Loading TrampleStopper");
+        LOGGER.info("[TrampleStopper] Loading!");
     }
 
     public static boolean onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
