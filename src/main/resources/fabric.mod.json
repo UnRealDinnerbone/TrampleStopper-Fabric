@@ -10,9 +10,13 @@
   "icon": "assets/tramplestopper/logo.png",
   "environment": "*",
   "entrypoints": {
+    "modmenu": [
+      "com.unrealdinnerbone.tramplestopper.compact.MMCompact"
+    ],
     "main": [
       "com.unrealdinnerbone.tramplestopper.TrampleStopper"
     ]
+
   },
   "mixins": [
     {
@@ -22,6 +26,8 @@
   ],
   "requires": {
     "fabricloader": "=>0.4.0",
-    "fabric": "*"
+    "fabric": "*",
+    "autoconfig1" : "=>1.0.1",
+    "cloth-config" : "=>0.2.1"
   }
 }
