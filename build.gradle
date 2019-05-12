@@ -8,7 +8,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.1-SNAPSHOT"
+		classpath "net.fabricmc:fabric-loom:0.2.3-SNAPSHOT"
 	}
 }
 
@@ -41,6 +41,8 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
 	modCompile "net.fabricmc:fabric:" + "${fabric_version}"
 
+	include "cloth-config:ClothConfig:0.2.1.14"
+	include "auto-config:auto:config:1.0.1+mc1.14"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	modCompile "auto-config:auto:config:1.0.1+mc1.14"
 	modCompile "io.github.prospector.modmenu:ModMenu:1.5.2-83"
@@ -58,10 +60,16 @@ curseforge {
 		changelogType = 'markdown'
 		releaseType = 'release'
 		addGameVersion '1.14'
+		addGameVersion "Java 8"
+		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
 		relations {
-			requiredDependency 'cloth-config'
-			requiredDependency 'auto-config'
+			embeddedLibrary 'cloth-config'
+			embeddedLibrary 'auto-config'
 			requiredDependency 'fabric'
+			optionalDependency 'modmenu'
+		}
+		afterEvaluate {
+			uploadTask.dependsOn(remapJar)
 		}
 	}
 	options{
