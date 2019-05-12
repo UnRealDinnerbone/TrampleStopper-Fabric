@@ -1,0 +1,5 @@
+{
+    "text.autoconfig.tramplestopper.category.default" : "Default",
+    "text.autoconfig.tramplestopper.option.type" : "Type",
+    "text.autoconfig.tramplestopper.option.featherFallingLevel" : "Feather Falling Level"
+}
