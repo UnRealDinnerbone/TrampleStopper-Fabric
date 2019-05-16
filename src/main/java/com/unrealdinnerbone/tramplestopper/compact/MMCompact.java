@@ -4,10 +4,9 @@ import com.unrealdinnerbone.tramplestopper.TrampleConfig;
 import com.unrealdinnerbone.tramplestopper.TrampleStopper;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
-import net.minecraft.client.gui.Screen;
+import net.minecraft.client.gui.screen.Screen;
 
-import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class MMCompact implements ModMenuApi {
 
@@ -17,8 +16,7 @@ public class MMCompact implements ModMenuApi {
     }
 
     @Override
-    public Optional<Supplier<Screen>> getConfigScreen(Screen screen) {
-        return Optional.of(AutoConfig.getConfigScreen(TrampleConfig.class, screen));
+    public Function<Screen, ? extends Screen> getConfigScreenFactory() {
+        return (Function<Screen, Screen>) screen -> AutoConfig.getConfigScreen(TrampleConfig.class, screen).get();
     }
-
 }

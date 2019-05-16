@@ -45,7 +45,7 @@ dependencies {
 	include "auto-config:auto:config:1.0.1+mc1.14"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	modCompile "auto-config:auto:config:1.0.1+mc1.14"
-	modCompile "io.github.prospector.modmenu:ModMenu:1.5.2-83"
+	modCompile "modmenu:ModMenu:1.5.3:84"
 
 }
 
@@ -59,7 +59,7 @@ curseforge {
 		changelog = getGitChangelog
 		changelogType = 'markdown'
 		releaseType = 'release'
-		addGameVersion '1.14'
+		addGameVersion "${minecraft_version}"
 		addGameVersion "Java 8"
 		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
 		relations {
