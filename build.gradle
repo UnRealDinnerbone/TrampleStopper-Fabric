@@ -43,12 +43,6 @@ processResources {
 	}
 }
 
-configurations {
-	shade
-	modCompile.extendsFrom shade
-	include.extendsFrom shade
-	
-}
 
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
@@ -67,8 +61,11 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
 	modCompile "net.fabricmc:fabric:" + "${fabric_version}"
 
-	shade "cloth-config:ClothConfig:" + "${cloth_config_version}"
-	shade "auto-config:auto:config:" + "${auto_config_version}"
+	modCompile "cloth-config:ClothConfig:" + "${cloth_config_version}"
+	modCompile "auto-config:auto:config:" + "${auto_config_version}"
+
+	include "cloth-config:ClothConfig:" + "${cloth_config_version}"
+	include "auto-config:auto:config:" + "${auto_config_version}"
 
 	modCompile "modmenu:ModMenu:1.5.3:84"
 
