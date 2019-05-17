@@ -1,10 +1,12 @@
+import net.fabricmc.loom.LoomGradlePlugin
+
 buildscript {
 	repositories {
 		gradlePluginPortal()
 		jcenter()
 		maven {
 			name = 'Fabric'
-			url = 'http://maven.modmuss50.me/'
+			url = 'https://maven.fabricmc.net/'
 		}
 	}
 	dependencies {
@@ -13,11 +15,10 @@ buildscript {
 }
 
 plugins {
-	id 'com.matthewprenger.cursegradle' version "1.1.2"
+	id 'com.matthewprenger.cursegradle' version "1.2.0"
 }
 
-apply plugin: net.fabricmc.loom.LoomGradlePlugin
-
+apply plugin: LoomGradlePlugin
 apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/master/generic/markdown-git-changelog.gradle'
 
 sourceCompatibility = 1.8
@@ -28,6 +29,31 @@ def buildVersion = ENV.BUILD_NUMBER ? "${mod_verison}.${ENV.BUILD_NUMBER}" : "${
 version = buildVersion + "-universal"
 
 archivesBaseName = "${mod_name}"
+
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+configurations {
+	shade
+	modCompile.extendsFrom shade
+	include.extendsFrom shade
+	
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
 
 repositories {
 	maven { url = "https://maven.fabricmc.net/" }
@@ -41,10 +67,9 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
 	modCompile "net.fabricmc:fabric:" + "${fabric_version}"
 
-	include "cloth-config:ClothConfig:0.2.1.14"
-	include "auto-config:auto:config:1.0.1+mc1.14"
-	modCompile "cloth-config:ClothConfig:0.2.1.14"
-	modCompile "auto-config:auto:config:1.0.1+mc1.14"
+	shade "cloth-config:ClothConfig:" + "${cloth_config_version}"
+	shade "auto-config:auto:config:" + "${auto_config_version}"
+
 	modCompile "modmenu:ModMenu:1.5.3:84"
 
 }
@@ -69,6 +94,7 @@ curseforge {
 			optionalDependency 'modmenu'
 		}
 		afterEvaluate {
+			mainArtifact(remapJar.output)
 			uploadTask.dependsOn(remapJar)
 		}
 	}

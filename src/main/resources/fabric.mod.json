@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "tramplestopper",
-  "version": "1.1.0",
+  "version": "${version}",
   "name": "Trample Stopper",
-  "description": "Stops crop trampling",
+  "description": "Simple mod that allowed for crops to not be trampled",
   "authors": [
     "UnRealDinnerbone"
   ],
@@ -16,7 +16,6 @@
     "main": [
       "com.unrealdinnerbone.tramplestopper.TrampleStopper"
     ]
-
   },
   "mixins": [
     {
@@ -27,7 +26,6 @@
   "requires": {
     "fabricloader": "=>0.4.0",
     "fabric": "*",
-    "autoconfig1" : "=>1.0.1",
     "cloth-config" : "=>0.2.1"
   }
 }
