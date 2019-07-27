@@ -3,6 +3,7 @@ package com.unrealdinnerbone.tramplestopper.mixin;
 import com.unrealdinnerbone.tramplestopper.TrampleStopper;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +18,11 @@ public class MixinBlockFarmland  {
     public void onFallen(World world, BlockPos blockPos, Entity entity, float height, CallbackInfo callbackInfo) {
         if(TrampleStopper.onFarmlandTrample(world, blockPos, entity, height)) {
             callbackInfo.cancel();
+        }else {
+            if(entity instanceof PlayerEntity) {
+                PlayerEntity playerEntit = (PlayerEntity) entity;
+                playerEntit.increaseStat(TrampleStopper.stat, 1);
+            }
         }
     }
 }

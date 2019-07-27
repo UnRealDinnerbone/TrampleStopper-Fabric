@@ -10,7 +10,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.3-SNAPSHOT"
+		classpath "net.fabricmc:fabric-loom:0.2.5-SNAPSHOT"
 	}
 }
 
@@ -59,15 +59,14 @@ dependencies {
 	minecraft "com.mojang:minecraft:" + "${minecraft_version}"
 	mappings "net.fabricmc:yarn:" + "${mappings_version}"
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
-	modCompile "net.fabricmc:fabric:" + "${fabric_version}"
+	modCompile "net.fabricmc.fabric-api:fabric-api:" + "${fabric_version}"
 
-	modCompile "cloth-config:ClothConfig:" + "${cloth_config_version}"
-	modCompile "auto-config:auto:config:" + "${auto_config_version}"
+	include "cloth-config:ClothConfig2:0.2.0"
+	include "auto-config:auto:config:1.1.2+mc1.14.1"
 
-	include "cloth-config:ClothConfig:" + "${cloth_config_version}"
-	include "auto-config:auto:config:" + "${auto_config_version}"
-
-	modCompile "modmenu:ModMenu:1.5.3:84"
+	modCompile "cloth-config:ClothConfig2:0.2.0"
+	modCompile "auto-config:auto:config:1.1.2+mc1.14.1"
+	modCompile "io.github.prospector.modmenu:ModMenu:1.6.2-92"
 
 }
 
@@ -91,7 +90,6 @@ curseforge {
 			optionalDependency 'modmenu'
 		}
 		afterEvaluate {
-			mainArtifact(remapJar.output)
 			uploadTask.dependsOn(remapJar)
 		}
 	}
