@@ -3,6 +3,7 @@ package com.unrealdinnerbone.tramplestopper;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.world.DummyClientTickScheduler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;

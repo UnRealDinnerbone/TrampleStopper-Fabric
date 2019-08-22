@@ -50,8 +50,10 @@ tasks.withType(JavaCompile) {
 
 
 repositories {
+	jcenter()
 	maven { url = "https://maven.fabricmc.net/" }
-	maven { url = "https://minecraft.curseforge.com/api/maven" }
+	maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
+
 }
 
 
@@ -61,12 +63,13 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:" + "${fabric_version}"
 
-	include "cloth-config:ClothConfig2:0.2.0"
-	include "auto-config:auto:config:1.1.2+mc1.14.1"
+	modCompile 'me.shedaniel.cloth:config-2:0.5.2'
+	modCompile "me.sargunvohra.mcmods:auto-config:1.2.0+mc1.14.4"
+	modCompile "io.github.prospector:modmenu:1.7.6+build.115"
 
-	modCompile "cloth-config:ClothConfig2:0.2.0"
-	modCompile "auto-config:auto:config:1.1.2+mc1.14.1"
-	modCompile "io.github.prospector.modmenu:ModMenu:1.6.2-92"
+	include 'me.shedaniel.cloth:config-2:0.5.2'
+	include "me.sargunvohra.mcmods:auto-config:1.2.0+mc1.14.4"
+
 
 }
 

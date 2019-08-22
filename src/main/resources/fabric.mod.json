@@ -23,7 +23,7 @@
       "config": "tramplestopper.common.json"
     }
   ],
-  "requires": {
+  "depends": {
     "fabricloader": "=>0.4.0",
     "fabric": "*",
     "cloth-config" : "=>0.2.1"
