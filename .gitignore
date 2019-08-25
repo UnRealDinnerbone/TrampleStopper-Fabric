@@ -1,5 +1,6 @@
 /*
 *
+!Jenkinsfile
 !src/*
 !.gradle/*
 !build.gradle
