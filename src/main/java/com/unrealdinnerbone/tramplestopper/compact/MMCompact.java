@@ -21,5 +21,5 @@ public class MMCompact implements ModMenuApi {
     @Override
     public Function<Screen, ? extends Screen> getConfigScreenFactory() {
         return (Function<Screen, Screen>) screen -> AutoConfig.getConfigScreen(TrampleConfig.class, screen).get();
-}
+    }
 }

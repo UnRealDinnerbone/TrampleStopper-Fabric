@@ -52,6 +52,8 @@ repositories {
 	jcenter()
 	maven { url = "https://maven.fabricmc.net/" }
 	maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
+	maven { url = "https://minecraft.curseforge.com/api/maven" }
+
 
 }
 
@@ -63,8 +65,11 @@ dependencies {
 
 	modCompile 'me.shedaniel.cloth:config-2:' + "${cloth_config_version}"
 	modCompile "io.github.prospector:modmenu:1.7.6+build.115"
+	modCompile "auto-config:auto:config:" + "${auto_config_version}"
 
 	include 'me.shedaniel.cloth:config-2:'+ "${cloth_config_version}"
+	include "auto-config:auto:config:" + "${auto_config_version}"
+
 }
 
 
