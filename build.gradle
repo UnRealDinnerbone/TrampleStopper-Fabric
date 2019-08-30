@@ -53,8 +53,6 @@ repositories {
 	maven { url = "https://maven.fabricmc.net/" }
 	maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
 	maven { url = "https://minecraft.curseforge.com/api/maven" }
-
-
 }
 
 
