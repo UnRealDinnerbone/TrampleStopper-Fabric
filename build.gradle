@@ -47,7 +47,6 @@ tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 }
 
-
 repositories {
 	jcenter()
 	maven { url = "https://maven.fabricmc.net/" }
@@ -60,14 +59,6 @@ dependencies {
 	minecraft "com.mojang:minecraft:" + "${minecraft_version}"
 	mappings "net.fabricmc:yarn:" + "${mappings_version}"
 	modCompile "net.fabricmc:fabric-loader:" + "${loader_version}"
-
-	modCompile 'me.shedaniel.cloth:config-2:' + "${cloth_config_version}"
-	modCompile "io.github.prospector:modmenu:1.7.6+build.115"
-	modCompile "auto-config:auto:config:" + "${auto_config_version}"
-
-	include 'me.shedaniel.cloth:config-2:'+ "${cloth_config_version}"
-	include "auto-config:auto:config:" + "${auto_config_version}"
-
 }
 
 
