@@ -75,11 +75,6 @@ curseforge {
 		addGameVersion "Java 8"
 		addGameVersion "Fabric"
 		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
-		relations {
-			embeddedLibrary 'cloth-config'
-			embeddedLibrary 'auto-config'
-			optionalDependency 'modmenu'
-		}
 		afterEvaluate {
 			uploadTask.dependsOn(remapJar)
 		}
