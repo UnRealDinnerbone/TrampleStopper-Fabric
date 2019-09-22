@@ -2,6 +2,7 @@ package com.unrealdinnerbone.tramplestopper;
 
 import me.sargunvohra.mcmods.autoconfig1.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1.annotation.Config;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -34,26 +35,27 @@ public class TrampleConfig implements ConfigData
                 for (ItemStack itemStack : entityPlayer.getArmorItems()) {
                     if (itemStack.getItem() instanceof ArmorItem) {
                         ArmorItem armorItem = (ArmorItem) itemStack.getItem();
-                        if(armorItem.getSlotType() == EquipmentSlot.FEET) {
+                        if (armorItem.getSlotType() == EquipmentSlot.FEET) {
                             if (EnchantmentHelper.getLevel(Enchantments.FEATHER_FALLING, itemStack) >= trampleConfig.getFeatherFallingLevel()) {
-                                return true;
+                                return TrampleResult.CANCEL;
                             }
                         }
                     }
                 }
             }
-            return false;
+            return TrampleResult.DEFAULT;
         }),
-        NEVER((trampleConfig, entity) -> false),
-        ALWAYS((trampleConfig, entity) -> true);
+        NEVER((trampleConfig, entity) -> TrampleResult.CANCEL),
+        ALWAYS((trampleConfig, entity) -> TrampleResult.TRAMPLE),
+        DEFAULT((trampleConfig, entity) -> TrampleResult.DEFAULT);
 
-        private final BiFunction<TrampleConfig, Entity, Boolean> function;
+        private final BiFunction<TrampleConfig, Entity, TrampleResult> function;
 
-        Type(BiFunction<TrampleConfig, Entity, Boolean> function) {
+        Type(BiFunction<TrampleConfig, Entity, TrampleResult> function) {
             this.function = function;
         }
 
-        public BiFunction<TrampleConfig, Entity, Boolean> getFunction() {
+        public BiFunction<TrampleConfig, Entity, TrampleResult> getFunction() {
             return function;
         }
     }
