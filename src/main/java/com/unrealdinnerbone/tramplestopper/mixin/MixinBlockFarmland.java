@@ -16,10 +16,8 @@ public class MixinBlockFarmland  {
 
     @Inject(method = "onLandedUpon(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V", at = @At("HEAD"), cancellable = true)
     public void onFallen(World world, BlockPos blockPos, Entity entity, float height, CallbackInfo callbackInfo) {
-        switch (TrampleStopper.onFarmlandTrample(world, blockPos, entity, height)) {
-            case TRAMPLE:
-                FarmlandBlock.setToDirt(world.getBlockState(blockPos), world, blockPos);
-            case CANCEL:
-                callbackInfo.cancel();        }
+        if(TrampleStopper.onFarmlandTrample(world, blockPos, entity, height)) {
+            callbackInfo.cancel();
+        }
     }
 }

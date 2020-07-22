@@ -1,49 +1,42 @@
 package com.unrealdinnerbone.tramplestopper;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Identifier;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TrampleStopper implements ModInitializer {
 
-    public static final String MOD_ID = "tramplestopper";
-    public static final Identifier FARMLAND_TRAMPLED;
-    public static final Identifier FARMLAND_SAVED;
     public static final Logger LOGGER = LogManager.getLogger();
-    private static final TrampleConfig CONFIG = new TrampleConfig();
-
-    static {
-        FARMLAND_TRAMPLED = Registry.register(Registry.CUSTOM_STAT, new Identifier(MOD_ID, "farmland_trampled"), new Identifier(MOD_ID, "farmland_trampled"));
-        FARMLAND_SAVED = Registry.register(Registry.CUSTOM_STAT, new Identifier(MOD_ID, "farmland_saved"), new Identifier(MOD_ID, "farmland_saved"));
-    }
-
 
     @Override
 	public void onInitialize() {
-        LOGGER.info("[TrampleStopper] Loading! (Non Config Version)");
+        LOGGER.info("[TrampleStopper] Loading!");
     }
 
-    public static TrampleResult onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
-        TrampleConfig trampleConfig = getConfig();
-        TrampleResult trampleResult = trampleConfig.getType().getFunction().apply(trampleConfig, entity);
-        return trampleResult;
-        //Todo FIX THIs
-//        else {
-//            if(entity instanceof PlayerEntity) {
-//                PlayerEntity playerEntit = (PlayerEntity) entity;
-//                playerEntit.increaseStat(TrampleStopper.FARMLAND_TRAMPLED, 1);
-//            }
-//        }
+    public static boolean onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity entityPlayer = (PlayerEntity) entity;
+            for (ItemStack itemStack : entityPlayer.getArmorItems()) {
+                if (itemStack.getItem() instanceof ArmorItem) {
+                    ArmorItem armorItem = (ArmorItem) itemStack.getItem();
+                    if (armorItem.getSlotType() == EquipmentSlot.FEET) {
+                        if (EnchantmentHelper.getLevel(Enchantments.FEATHER_FALLING, itemStack) >= 1) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
-
-    public static TrampleConfig getConfig() {
-        return CONFIG;
-    }
-
 
 }
