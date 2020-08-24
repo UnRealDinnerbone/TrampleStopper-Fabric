@@ -1,22 +1,21 @@
 package com.unrealdinnerbone.tramplestopper.mixin;
 
 import com.unrealdinnerbone.tramplestopper.TrampleStopper;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FarmBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FarmlandBlock.class)
+@Mixin(FarmBlock.class)
 public class MixinBlockFarmland  {
 
-    @Inject(method = "onLandedUpon(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V", at = @At("HEAD"), cancellable = true)
-    public void onFallen(World world, BlockPos blockPos, Entity entity, float height, CallbackInfo callbackInfo) {
-        if(TrampleStopper.onFarmlandTrample(world, blockPos, entity, height)) {
+    @Inject(method = "fallOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;F)V", at = @At("HEAD"), cancellable = true)
+    public void onFallen(Level level, BlockPos blockPos, Entity entity, float height, CallbackInfo callbackInfo) {
+        if(TrampleStopper.onFarmlandTrample(entity)) {
             callbackInfo.cancel();
         }
     }

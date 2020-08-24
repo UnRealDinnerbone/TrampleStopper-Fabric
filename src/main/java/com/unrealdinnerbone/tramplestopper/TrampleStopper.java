@@ -1,15 +1,13 @@
 package com.unrealdinnerbone.tramplestopper;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,17 +17,17 @@ public class TrampleStopper implements ModInitializer {
 
     @Override
 	public void onInitialize() {
-        LOGGER.info("[TrampleStopper] Loading!");
+        LOGGER.info("Loading!");
     }
 
-    public static boolean onFarmlandTrample(World world, BlockPos blockPos, Entity entity, float height) {
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity entityPlayer = (PlayerEntity) entity;
-            for (ItemStack itemStack : entityPlayer.getArmorItems()) {
+    public static boolean onFarmlandTrample(Entity entity) {
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
+            for (ItemStack itemStack : player.getArmorSlots()) {
                 if (itemStack.getItem() instanceof ArmorItem) {
                     ArmorItem armorItem = (ArmorItem) itemStack.getItem();
-                    if (armorItem.getSlotType() == EquipmentSlot.FEET) {
-                        if (EnchantmentHelper.getLevel(Enchantments.FEATHER_FALLING, itemStack) >= 1) {
+                    if (armorItem.getSlot() == EquipmentSlot.FEET) {
+                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FALL_PROTECTION, itemStack) >= 1) {
                             return true;
                         }
                     }

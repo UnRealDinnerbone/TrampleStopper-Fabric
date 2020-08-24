@@ -10,9 +10,6 @@
   "icon": "assets/tramplestopper/logo.png",
   "environment": "*",
   "entrypoints": {
-    "modmenu": [
-      "com.unrealdinnerbone.tramplestopper.compact.MMCompact"
-    ],
     "main": [
       "com.unrealdinnerbone.tramplestopper.TrampleStopper"
     ]
@@ -22,8 +19,5 @@
       "environment": "*",
       "config": "tramplestopper.common.json"
     }
-  ],
-  "depends": {
-    "fabric": "*"
-  }
+  ]
 }
